@@ -63,7 +63,7 @@ const ListSong = (props) => {
                                         <div className="w_tp_song_name">
                                             <h3><a href="#">{item.songs.title}</a></h3>
                                             <h3><a href="#">{item.artists.fullName}</a></h3>
-                                            <h3>Lượt nghe: {item.songs.countListen}</h3>
+                                            <h3>Lượt nghe: {item.songs.countListen != null?item.songs.countListen:0}</h3>
                                         </div>
                                     </div>
                                 </div>
