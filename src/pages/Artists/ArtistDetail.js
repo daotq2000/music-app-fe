@@ -11,6 +11,7 @@ import PauseAll from '../../resource/images/svg/pause_all.svg'
 import QueueImage from '../../resource/images/svg/add_q.svg'
 import { getPlayList, playSingleSong } from "../../redux/playReducer";
 import $ from 'jquery'
+import {updateTotalListen} from "../../redux/songReducer";
 const ListSong = (props) => {
     const dispatch = useDispatch();
     const items = props.items;
@@ -94,7 +95,6 @@ const ArtistDetail = (props) => {
     const dispatch = useDispatch();
     const [artist, setArtist] = useState(null);
     const [songs, setSongs] = useState([]);
-    console.log(songs)
     useEffect(() => {
         dispatch(getArtistById(params.id))
         // dispatch(getAllSongByArtistId(params.id));
@@ -125,6 +125,10 @@ const ArtistDetail = (props) => {
     useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
+    const playAllArtist = () => {
+        dispatch(updateTotalListen({target: 'artist', id: params.id}))
+        dispatch(playSingleSong(songs))
+    }
     return (
         <>
             <div className="album_single_data">
@@ -140,7 +144,7 @@ const ArtistDetail = (props) => {
                         <a className="album_date">{`Lượt nghe: ${artist != null ? (artist.countListen != null ? artist.countListen : 0) : ''}`}</a>
                     </div>
                     <div style={{ color: 'white', fontWeight: '700' }} className="album_btn">
-                        <a style={{ cursor: 'pointer' }} onClick={() => dispatch(playSingleSong(songs))} className="ms_btn play_btn"><span className="play_all"><img src={PlayAllIcon} alt="" />Play All</span><span className="pause_all"><img src={PauseAll} alt="" />Pause</span></a>
+                        <a style={{ cursor: 'pointer' }} onClick={() => playAllArtist()} className="ms_btn play_btn"><span className="play_all"><img src={PlayAllIcon} alt="" />Play All</span><span className="pause_all"><img src={PauseAll} alt="" />Pause</span></a>
                         <a style={{ cursor: 'pointer' }} className="ms_btn"><span className="play_all"><img src={QueueImage} alt="" />Add To Queue</span></a>
                     </div>
                 </div>
@@ -152,7 +156,6 @@ const ArtistDetail = (props) => {
                     <li><a ><span className="opt_icon"><span className="icon icon_queue" /></span>Add To Queue</a></li>
                     <li><a ><span className="opt_icon"><span className="icon icon_dwn" /></span>Download Now</a></li>
                     <li><a ><span className="opt_icon"><span className="icon icon_playlst" /></span>Add To Playlist</a></li>
-
                 </ul>
             </div>
             <div class="ms_weekly_wrapper">

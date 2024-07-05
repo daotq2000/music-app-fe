@@ -18,10 +18,9 @@ return (
                   <br/>
                   Thêm chút tình mình có thuộc về nhau?
                 </p>
-                <div className="ms_banner_btn">
-                  <a href="!#" className="ms_btn">Listen Now</a>
-                  <a href="!#" className="ms_btn">Add To Queue</a>
-                </div>
+                {/*<div className="ms_banner_btn">*/}
+                {/*  <a href="!#" className="ms_btn">Listen Now</a>*/}
+                {/*</div>*/}
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ import Pagination from '@material-ui/lab/Pagination';
 import {getPlayList} from "../../redux/playReducer";
 import history from '../../router/history'
 import { Link } from 'react-router-dom';
+import {updateTotalListen} from "../../redux/songReducer";
 const useStyles = makeStyles(theme => ({
     root: {
         '& > *': {
@@ -75,6 +76,7 @@ const ListArtists = (props) => {
       useEffect(() => {
         window.scrollTo(0, 0)
       }, [])
+
     return (
         <>
             <div className="ms_top_artist">
