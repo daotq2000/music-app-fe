@@ -38,13 +38,14 @@ const ListSong = (props) => {
         dispatch(playSingleSong(rs))
     }
     if (items != null) {
+        console.log(items)
         return (
             <>
                 {props.items.map((item, i) => {
-
+                    console.log(item)
                     return (
 
-                        <div className="col-lg-12 col-md-12 padding_right40">
+                        <div key={item.songs.id} className="col-lg-12 col-md-12 padding_right40">
                             <div className="ms_weekly_box">
                                 <div className="weekly_left">
                                     <span className="w_top_no">
@@ -52,7 +53,7 @@ const ListSong = (props) => {
                                     </span>
                                     <div className="w_top_song">
                                         <div className="w_tp_song_img">
-                                            <img src={item.image} alt="" className="img-fluid" />
+                                            <img src={item.songs.image} alt="" className="img-fluid" />
                                             <div className="ms_song_overlay">
                                             </div>
                                             <div onClick={() => playSingleSongAction(item)} className="ms_play_icon">
@@ -60,13 +61,14 @@ const ListSong = (props) => {
                                             </div>
                                         </div>
                                         <div className="w_tp_song_name">
-                                            <h3><a href="#">{item.title}</a></h3>
-                                            <h3><a href="#">{renderArtist(item.artistSongs)}</a></h3>
+                                            <h3><a href="#">{item.songs.title}</a></h3>
+                                            <h3><a href="#">{item.artists.fullName}</a></h3>
+                                            <h3>Lượt nghe: {item.songs.countListen}</h3>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="weekly_right">
-                                    <span className="w_song_time">{getSecondsToMinutesAndSeconds(Math.floor(item.timePlay))}</span>
+                                    <span className="w_song_time">{getSecondsToMinutesAndSeconds(Math.floor(item.songs.timePlay))}</span>
                                     <span onClick={showMoreItem} className="ms_more_icon" data-other={1}>
                                         <img src={MoreIcon} alt="" />
                                     </span>
@@ -74,7 +76,7 @@ const ListSong = (props) => {
                                 <ul className="more_option">
                                     <li><a href="#"><span className="opt_icon"><span className="icon icon_fav" /></span>Add To Favourites</a></li>
                                     <li><a href={`#`}><span className="opt_icon"><span className="icon icon_queue" /></span>Add To Queue</a></li>
-                                    <li><a href={item.mediaUrl}><span className="opt_icon"><span className="icon icon_dwn" /></span>Download Now</a></li>
+                                    <li><a href={item.songs.mediaUrl}><span className="opt_icon"><span className="icon icon_dwn" /></span>Download Now</a></li>
                                     <li><a href="#"><span className="opt_icon"><span className="icon icon_playlst" /></span>Add To Playlist</a></li>
                                 </ul>
                             </div>
@@ -92,9 +94,10 @@ const ArtistDetail = (props) => {
     const dispatch = useDispatch();
     const [artist, setArtist] = useState(null);
     const [songs, setSongs] = useState([]);
+    console.log(songs)
     useEffect(() => {
         dispatch(getArtistById(params.id))
-        dispatch(getAllSongByArtistId(params.id));
+        // dispatch(getAllSongByArtistId(params.id));
 
     }, [dispatch, params.id])
     const artistReducer = useSelector((e) => {
@@ -107,6 +110,7 @@ const ArtistDetail = (props) => {
             setSongs((currentArtist.artistSongs))
         }
     }, [artistReducer, params.id])
+    console.log(artistReducer.currentArtist)
     const parseListSong = (data) => {
         let result = [];
         if (data != undefined) {
@@ -154,7 +158,7 @@ const ArtistDetail = (props) => {
             <div class="ms_weekly_wrapper">
                 <div class="ms_weekly_inner">
                     <div class="row">
-                        <ListSong artistSongs={songs} items={parseListSong(songs)} />
+                        <ListSong artistSongs={songs} items={songs} />
                     </div>
                 </div>
             </div>
