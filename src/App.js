@@ -14,7 +14,6 @@ function App() {
       <div className="App">
         <Router history={history}>
           <Switch>
-            
             <Route path="/admin" component={()=><PrivateRouter component={Dashboard} />} />
             <Route path="/" component={ClientRouter} />
           </Switch>

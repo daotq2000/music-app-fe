@@ -228,6 +228,10 @@ const PlayAudio = (props) => {
     audio.currentTime = currentTimeAudio;
     $('.jp-play-bar').css('width', percentage + '%');
   }
+  const repeatPlay = () =>{
+    audio.currentTime = 0;
+    updatebar(0);
+  }
   const renderRightQueue = () => {
     return (
       <div className="jp_queue_wrapper">
@@ -327,13 +331,13 @@ const PlayAudio = (props) => {
                 <div className="jp-gui jp-interface flex-wrap">
                   <div className="jp-controls flex-item">
                     <button className="jp-previous" onClick={handlePrevSong} tabIndex={0}>
-                      <i className="ms_play_control" />
+                      <i className="ms_play_control"  />
                     </button>
                     <button onClick={PlayOrPauseEvent} className="jp-play" tabIndex={0}>
-                      <i className="ms_play_control" />
+                      <i className="ms_play_control"  />
                     </button>
                     <button className="jp-next" onClick={handleNextSong} tabIndex={0}>
-                      <i className="ms_play_control" />
+                      <i className="ms_play_control"  />
                     </button>
                   </div>
                   <div className="jp-progress-container flex-item">
@@ -352,10 +356,10 @@ const PlayAudio = (props) => {
 
                   <div className="jp-toggles flex-item">
                     <button className="jp-shuffle" onClick={handleRandom} tabIndex={0} title="Shuffle">
-                      <i className="ms_play_control" />
+                      <i className="ms_play_control"  />
                     </button>
                     <button className="jp-repeat" tabIndex={0} title="Repeat">
-                      <i className="ms_play_control" />
+                      <i className="ms_play_control" onClick={()=>repeatPlay()} />
                     </button>
                   </div>
                   <div className="jp_quality_optn custom_select">

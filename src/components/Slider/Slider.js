@@ -42,7 +42,7 @@ const Slider = (props) => {
                         </div>
                         <div className="ms_rcnt_box_text">
                             <h3><Link to={`/album/${item.id}`} >{item.albumName}</Link></h3>
-                            <p>Lượt nghe: {item.totalListen}</p>
+                            <p>Lượt nghe: {item.totalListen != null ? item.totalListen:0 }</p>
                         </div>
                     </div>
                 </div>
@@ -99,26 +99,26 @@ const Slider = (props) => {
                     spaceBetween={30}
                     resizeObserver={true}
                     dynamicBullets={false}
-                    //   slidesPerGroup={4}
-                    // autoplay
-                    // loop
+                      slidesPerGroup={4}
+                    // // autoplay
+                    // // loop
                     navigation
                     breakpoints={{
                         "300": {
                             "slidesPerView": 2,
-                            "spaceBetween": 20
+                            "spaceBetween": 10
                         },
                         "640": {
                             "slidesPerView": 2,
-                            "spaceBetween": 20
+                            "spaceBetween": 10
                         },
                         "768": {
                             "slidesPerView": 4,
-                            "spaceBetween": 40
+                            "spaceBetween": 10
                         },
                         "1024": {
-                            "slidesPerView": 6,
-                            "spaceBetween": 20
+                            "slidesPerView": 5,
+                            "spaceBetween": 10
                         }
                     }}
 

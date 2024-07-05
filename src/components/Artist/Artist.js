@@ -82,35 +82,36 @@ const Artist = (props) => {
                     <span className="veiw_all"><Link to={`/artist`}>Xem Thêm</Link></span>
                 </div>
                 <Swiper
-                    id="albums"
+                    id="artist"
 
                     virtual
                     slidesPerColumnFill="row"
                     spaceBetween={30}
                     resizeObserver={true}
                     dynamicBullets={false}
-                    //   slidesPerGroup={4}
-                    // autoplay
-                    // loop
+                    slidesPerGroup={4}
+                    // // autoplay
+                    // // loop
                     navigation
                     breakpoints={{
                         "300": {
                             "slidesPerView": 2,
-                            "spaceBetween": 20
+                            "spaceBetween": 10
                         },
                         "640": {
                             "slidesPerView": 2,
-                            "spaceBetween": 20
+                            "spaceBetween": 10
                         },
                         "768": {
                             "slidesPerView": 4,
-                            "spaceBetween": 40
+                            "spaceBetween": 10
                         },
                         "1024": {
-                            "slidesPerView": 6,
-                            "spaceBetween": 20
+                            "slidesPerView": 5,
+                            "spaceBetween": 10
                         }
                     }}
+
 
 
                 >
