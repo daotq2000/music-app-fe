@@ -133,7 +133,7 @@ const ArtistDetail = (props) => {
                     <div className="album_feature">
                         <a className="album_date">{artist != null ? songs.length : '0'} bài hát   </a>
                         <a className="album_date">{`Hoạt động tại: ${artist != null ? artist.countryActive : ''}`}</a>
-                        <a className="album_date">{`Luượt nghe: ${artist != null ? (artist.countListen != null ? artist.countListen : 0) : ''}`}</a>
+                        <a className="album_date">{`Lượt nghe: ${artist != null ? (artist.countListen != null ? artist.countListen : 0) : ''}`}</a>
                     </div>
                     <div style={{ color: 'white', fontWeight: '700' }} className="album_btn">
                         <a style={{ cursor: 'pointer' }} onClick={() => dispatch(playSingleSong(songs))} className="ms_btn play_btn"><span className="play_all"><img src={PlayAllIcon} alt="" />Play All</span><span className="pause_all"><img src={PauseAll} alt="" />Pause</span></a>
