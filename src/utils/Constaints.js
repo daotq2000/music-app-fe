@@ -1,4 +1,4 @@
-export const API_ENDPOINT = 'http://localhost:8081/'
+export const API_ENDPOINT = 'http://application-loadbalancer-1242662601.us-east-1.elb.amazonaws.com/'
 
 export const STATUS_CODE = {
     SUCCESS: 200,
