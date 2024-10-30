@@ -19,21 +19,21 @@ class AxiosService {
     }
 
     get(url) {
-        return this.instance.get(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } });
+        return this.instance.get(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"ngrok-skip-browser-warning": "69420"} });
     }
     post(url) {
-        return this.instance.post(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
+        return this.instance.post(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"ngrok-skip-browser-warning": "69420"} })
     }
     post(url, body) {
-        return this.instance.post(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
+        return this.instance.post(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"ngrok-skip-browser-warning": "69420"} })
     }
 
     put(url, body) {
-        return this.instance.put(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
+        return this.instance.put(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"ngrok-skip-browser-warning": "69420"} })
     }
 
     delete(url) {
-        return this.instance.delete(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
+        return this.instance.delete(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"ngrok-skip-browser-warning": "69420"} })
     }
 }
 
