@@ -16,7 +16,7 @@ export const getSongById = (id) => {
 }
 export const getTop15BestSong = () => {
     const path = url + '/top15'
-    let data = axiosService.get(API_ENDPOINT + path);
+    let data = axiosService.post(API_ENDPOINT + path);
     return data;
 }
 export const saveSong = (data) => {

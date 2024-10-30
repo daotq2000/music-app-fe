@@ -26,7 +26,10 @@ const Top15SongPopular = () => {
     let arr3 = [];
     let idx = 1;
     let audio = null;
-    if(list != undefined) {
+    if(list != undefined && list != null) {
+      if(list.length > 0){
+        
+      }
       list.forEach((el, index) => {
         let obj = { ...el };
         obj.index = idx;
