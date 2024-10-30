@@ -19,21 +19,21 @@ class AxiosService {
     }
 
     get(url) {
-        return this.instance.get(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization") } });
+        return this.instance.get(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } });
     }
     post(url) {
-        return this.instance.post(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization") } })
+        return this.instance.post(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
     }
     post(url, body) {
-        return this.instance.post(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization") } })
+        return this.instance.post(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
     }
 
     put(url, body) {
-        return this.instance.put(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization") } })
+        return this.instance.put(url, body, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
     }
 
     delete(url) {
-        return this.instance.delete(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization") } })
+        return this.instance.delete(url, { 'headers': { 'Authorization': localStorage.getItem("Authorization"),"Content-Type": "application/json" } })
     }
 }
 
