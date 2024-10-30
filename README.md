@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+---
+title : "Build a Scalable Music Streaming Application Using Amazon Fargate and Serverless Architecture"
+description: "Learn how to create a cost-effective and scalable serverless music streaming application with Amazon Fargate, leveraging Terraform for cloud infrastructure management."
+date : "`r Sys.Date()`"
+weight : 3
+chapter : false
+pre : " <b> 2.3 </b> "
+image: "/images/3/3.0/music.jpg" # The path to your image
+---
+## 1.Overview Architechture
+![AWS DESIGN ARCHITECTURE](https://auto.io.vn/images/3/3.0/music-multi.drawio.svg?featherlight=false&width=100pc)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Challenge 3: Build a Music Serverless Application on Amazon Web Services (AWS)
+**Objective:**
 
-## Available Scripts
+Develop a full-stack serverless application for streaming and managing music. The application should leverage the power of AWS for deployment, scaling, and management, ensuring high availability and performance.
 
-In the project directory, you can run:
+**- Backend:**
++ Technology: Java
++ Framework: Spring Boot
++ Description: Implement the backend using Spring Boot to handle music streaming, user management, and other core functionalities. The backend will expose RESTful APIs for the frontend to interact with.
 
-### `yarn start`
+**-Frontend:**
++ Technology: ReactJS
++ Description: Develop the frontend using ReactJS to provide a dynamic and responsive user interface. The frontend will consume the RESTful APIs provided by the backend to display and manage music content.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**-Database:**
++ Technology: MySQL
++ Service: Amazon Aurora MySQL
++ Description: Use Amazon Aurora MySQL as the database solution for storing user data, music metadata, playlists, and other relevant information. Aurora MySQL offers high performance and scalability for handling large amounts of data.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**-Deployment:**
++ Platform: Amazon Web Services (AWS)
 
-### `yarn test`
+**- Services:Amazon Fargate:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
++ Deploy backend services in a serverless container environment to simplify infrastructure management.
++ Amazon Aurora MySQL: Utilize this fully managed database service for scalable and secure data storage.
++ Amazon ElastiCache (Redis): Implement Redis for caching to improve the performance and speed of the application.
++ Application Load Balancer (ALB): Distribute incoming traffic across multiple targets, ensuring high availability and fault tolerance.
++ Internet Gateway: Enable internet access for the application.
++ Auto Scaling Group: Automatically scale the application in response to demand, ensuring consistent performance and cost-efficiency.
 
-### `yarn build`
+**- Infrastructure as Code (IaC):**
++ Technology: Terraform
++ Description: Use Terraform to define and manage the infrastructure required for the application. Terraform scripts will automate the provisioning of AWS resources, ensuring consistent and reproducible environments.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Requirements:
+Backend:
+Develop RESTful APIs using Spring Boot.
+Implement authentication and authorization mechanisms.
+Integrate with Amazon Aurora MySQL for data storage.
+Use Redis for caching frequently accessed data.
+Frontend:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Build a responsive user interface using ReactJS.
+Consume backend APIs for data retrieval and manipulation.
+Ensure seamless user experience with efficient state management.
+Deployment and Scaling:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Containerize the backend services and deploy them using Amazon Fargate.
+Set up Amazon Aurora MySQL for scalable and reliable database management.
+Configure Redis cache using Amazon ElastiCache.
+Implement an Application Load Balancer to manage traffic distribution.
+Set up an Internet Gateway for internet access.
+Create an Auto Scaling Group to handle varying loads automatically.
+Use Terraform for defining and provisioning the entire infrastructure.
+Documentation and Testing:
 
-### `yarn eject`
+Document the architecture, setup, and deployment processes.
+Write unit tests and integration tests for the backend.
+Ensure thorough testing of the frontend to maintain a bug-free user experience.
+By the end of this challenge, you will have a fully functional, serverless music application running on AWS, with a robust backend, dynamic frontend, and scalable infrastructure.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
