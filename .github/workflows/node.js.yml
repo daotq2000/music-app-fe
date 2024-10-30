@@ -30,11 +30,14 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
+        env:
+          CI: false
 
       # Step 4: Build the React app
       - name: Build React App
         run: npm run build
-
+        env:
+          CI: false
       # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
