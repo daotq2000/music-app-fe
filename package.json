@@ -1,7 +1,7 @@
 {
   "name": "spotify",
   "version": "0.1.0",
-  "homepage": "https://daotq2000.github.io/music-app-fe",
+  "homepage": "https://music.auto.io.vn",
   "private": true,
   "dependencies": {
     "@hookform/error-message": "^2.0.0",
