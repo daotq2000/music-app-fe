@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: 'ubuntu-latest'  # Use the latest version of Ubuntu for the runner
+    runs-on: 'ubuntu-20.04'  # Use the latest version of Ubuntu for the runner
 
     steps:
       # Check out the repository code
