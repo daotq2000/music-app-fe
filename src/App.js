@@ -7,8 +7,10 @@ import Dashboard from './componentAdmin/Dashboard/Dashboard'
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import PrivateRouter from './router/PrivateRouter'
+import { HashRouter } from 'react-router-dom'
 function App() {
   return (
+    <HashRouter>
     <BrowserRouter>
      <SnackbarProvider maxSnack={3}>
       <div className="App">
@@ -21,6 +23,7 @@ function App() {
       </div>
       </SnackbarProvider>
     </BrowserRouter>
+    </HashRouter>
   );
 }
 
