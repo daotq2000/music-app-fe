@@ -90,7 +90,7 @@ const Footer = () => {
       <div className="col-lg-12">
         <div className="ms_copyright">
           <div className="footer_border" />
-          <p>Copyright © 2021 <a href="https://www.facebook.com/daotq2/">Design and Code By Quang Đạo</a>. Nghiêm cấm mọi hành vi ăn cắp theme :)).</p>
+          <p>Copyright © 2024 <a href="https://www.youtube.com/@code3s_dev">Design and Code By Code3s</a>.</p>
         </div>
       </div>
     </div>

@@ -87,7 +87,7 @@ const Artist = (props) => {
                     virtual
                     slidesPerColumnFill="row"
                     spaceBetween={30}
-                    resizeObserver={true}
+                    // resizeObserver={true}
                     dynamicBullets={false}
                     slidesPerGroup={4}
                     // // autoplay

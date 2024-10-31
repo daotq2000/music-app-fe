@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import CloseImage from '../../resource/images/svg/close.svg'
 import MoreImage from '../../resource/images/svg/more.svg'
 import { useSelector, useDispatch } from 'react-redux'
 import { getSecondsToMinutesAndSeconds } from '../../utils/FormatDateTime'
 import { renderArtist } from '../../utils/UtilsFunction'
-import $ from 'jquery'
 import { updateTotalListen } from '../../redux/songReducer'
-
+import {Link} from 'react-router-dom'
 let audio;
 
 const PlayAudio = (props) => {
@@ -17,6 +16,9 @@ const PlayAudio = (props) => {
   const [currentTrackMoment, setCurrentTrackMoment] = useState(0);
   const [progressBarWidth, setProgressBarWidth] = useState('0');
   const [timeDrag, setTimeDrag] = useState(false);
+  const progressBarRef = useRef(null);
+  const progressContainerRef = useRef(null);
+  const audioCurrentTime = useRef(null);
   const data = useSelector((states) => {
     return states.playReducer;
   });
@@ -25,6 +27,8 @@ const PlayAudio = (props) => {
     isRepeat: false,
     openBarPlay: false,
     playList: [],
+    isPlay: false,
+    isPaused: false
   })
   const initData = () => {
     let playList = data.playList;
@@ -137,7 +141,7 @@ const PlayAudio = (props) => {
   }
   useEffect(() => {
     window.addEventListener('touchstart', () => {
-      if (currentPlay.id != undefined) {
+      if (currentPlay && currentPlay.id == undefined && state.isPaused ) {
         audio.muted = false
         audio.play();
       }
@@ -153,11 +157,13 @@ const PlayAudio = (props) => {
     }
     return;
   }
-
+  const handleMouseUp = (event) => {
+    setTimeDrag(false);
+    updatebar(event.pageX)
+  };
   const handleOnMouseDown = e => {
     setTimeDrag(true);
     updatebar(e.pageX);
-
   }
   const handleOnMouseUp = e => {
     if (timeDrag) {
@@ -215,9 +221,11 @@ const PlayAudio = (props) => {
     return result;
   }
   const updatebar = (x) => {
-    var progress = $('.jp-progress');
-    var position = x - progress.offset().left;
-    var percentage = 100 * position / progress.width();
+    const {  width,left } = progressContainerRef.current.getBoundingClientRect();
+    // const clickPosition = pageX - left;
+    var position = x - left;
+    
+    var percentage = 100 * position / width;
     if (percentage > 100) {
       percentage = 100;
     }
@@ -225,9 +233,15 @@ const PlayAudio = (props) => {
       percentage = 0;
     }
     let currentTimeAudio = ((audio.duration * percentage) / 100);
-    audio.currentTime = currentTimeAudio;
-    $('.jp-play-bar').css('width', percentage + '%');
+    if(audioCurrentTime.current){
+      audioCurrentTime.current.currentTime = currentTimeAudio;
+    }
+    if (progressBarRef.current) {
+      progressBarRef.current.style.width = `${percentage}%`;
+    }
+    // $('.jp-play-bar').css('width', percentage + '%');
   }
+  
   const repeatPlay = () =>{
     audio.currentTime = 0;
     updatebar(0);
@@ -277,6 +291,26 @@ const PlayAudio = (props) => {
       </div>
     );
   }
+  const returnArtist = (artist) => {
+    console.log(artist);
+       if (artist == undefined) {
+        return 'N/A';
+    }
+    var artists = [];
+    if (artist != null || artist != undefined) {
+        if (artist.length > 0) {
+             for (let i = 0; i < artist.length; i++) {
+                artists.push(<Link to={`/artist/${artist[i].artists.id}`}>{artist[i].artists.fullName}</Link>); 
+                if (artist.length > 1 && i < artist.length - 1) {
+                    artists.push(<span>&</span>);
+                }
+            }
+                 
+        }
+    }
+    return artists;
+  }
+
   return (
     <>
       <div style={state.openBarPlay ? { display: '' } : { display: 'none' }} className="ms_player_wrapper">
@@ -287,7 +321,7 @@ const PlayAudio = (props) => {
           <div className="audio-player">
             <div id="jquery_jplayer_1" className="jp-jplayer" style={{ width: '0px', height: '0px' }}>
               <img id="jp_poster_0" style={{ width: '0px', height: '0px', display: 'none' }} />
-              <audio onTimeUpdate={(e) => { handleTimeupdate(e) }} onLoadedMetadata={handleMetadata} id="jp_audio_0" preload="none" src="" title="Cro Magnon Man" >
+              <audio ref={audioCurrentTime} onTimeUpdate={(e) => { handleTimeupdate(e) }} onLoadedMetadata={handleMetadata} id="jp_audio_0" preload="none" src="" title="Cro Magnon Man" >
                 <p>Your user agent does not support the HTML5 Audio element.</p>
               </audio>
             </div>
@@ -302,7 +336,7 @@ const PlayAudio = (props) => {
                           <div className="que_data">
 
                             <h3 ><a style={{ color: 'white' }} >{currentPlay != undefined ? currentPlay.title : ''}</a></h3>
-                            <div className="jp-artist-name">{renderArtist(currentPlay.artistSongs)}</div>
+                            {currentPlay != null ? <div className="jp-artist-name">{returnArtist(currentPlay.artistSongs)}</div>:<></>}
                           </div>
                         </div>
                       </div>
@@ -338,14 +372,14 @@ const PlayAudio = (props) => {
                       <i className="ms_play_control"  />
                     </button>
                   </div>
-                  <div className="jp-progress-container flex-item">
+                  <div ref={progressContainerRef } className="jp-progress-container flex-item">
                     <div className="jp-time-holder">
                       <span className="jp-current-time" id="playingTime" role="timer" aria-label="time">{getSecondsToMinutesAndSeconds(currentTrackMoment)}</span>
                       <span className="jp-duration" id="durationTime" role="timer" aria-label="duration">{currentTrackDuration}</span>
                     </div>
                     <div className="jp-progress" >
-                      <div className="jp-seek-bar" onMouseDown={handleOnMouseDown} style={{ width: '100%' }}>
-                        <div className="jp-play-bar" onTouchStart={handleOnMouseMove} onMouseUp={handleOnMouseUp} onMouseMove={handleOnMouseMove} style={{ width: `${parseInt(progressBarWidth)}%` }}>
+                      <div  className="jp-seek-bar" onMouseLeave={handleOnMouseDown} onMouseDown={handleOnMouseDown}  onMouseMove={handleOnMouseDown}  onMouseUp={handleMouseUp}  onTouchStart={handleOnMouseMove} onTouchMove={handleOnMouseUp} onTouchEnd={handleOnMouseMove} style={{ width: '100%' }}>
+                        <div ref={progressBarRef} className="jp-play-bar" onTouchStart={handleOnMouseMove} onTouchMove={handleOnMouseUp} onTouchEnd={handleOnMouseMove} style={{ width: `${parseInt(progressBarWidth)}%` }}>
                           <div className="bullet" />
                         </div>
                       </div>
