@@ -115,7 +115,6 @@ const PlayAudio = (props) => {
     setState({ ...state, isPlay: play, isPaused: pause });
   };
   const handleTimeupdate = (e) => {
-    console.log("click");
     setCurrentTrackMoment(Math.floor(e.target.currentTime));
     setProgressBarWidth((e.target.currentTime / e.target.duration) * 100 + "%");
   };
@@ -274,9 +273,6 @@ const PlayAudio = (props) => {
     }
     let currentTimeAudio = (audio.duration * percentage) / 100;
     if (audioCurrentTime.current) {
-      console.log(currentTimeAudio);
-      console.log(audioCurrentTime.current);
-      
       audioCurrentTime.current.currentTime = parseFloat(currentTimeAudio);
     }
     if (progressBarRef.current) {
