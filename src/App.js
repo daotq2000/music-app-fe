@@ -11,8 +11,7 @@ import { HashRouter } from 'react-router-dom'
 function App() {
   return (
     <HashRouter>
-    <BrowserRouter>
-     <SnackbarProvider maxSnack={3}>
+     <SnackbarProvider maxSnack={5}>
       <div className="App">
         <Router history={history}>
           <Switch>
@@ -22,7 +21,6 @@ function App() {
         </Router>
       </div>
       </SnackbarProvider>
-    </BrowserRouter>
     </HashRouter>
   );
 }
