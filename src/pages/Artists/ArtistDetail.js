@@ -39,11 +39,9 @@ const ListSong = (props) => {
         dispatch(playSingleSong(rs))
     }
     if (items != null) {
-        console.log(items)
         return (
             <>
                 {props.items.map((item, i) => {
-                    console.log(item)
                     return (
 
                         <div key={item.songs.id} className="col-lg-12 col-md-12 padding_right40">
@@ -63,7 +61,9 @@ const ListSong = (props) => {
                                         </div>
                                         <div className="w_tp_song_name">
                                             <h3><a href="#">{item.songs.title}</a></h3>
+                                            <br />
                                             <h3><a href="#">{item.artists.fullName}</a></h3>
+                                            <br />
                                             <h3>Lượt nghe: {item.songs.countListen != null?item.songs.countListen:0}</h3>
                                         </div>
                                     </div>
@@ -110,7 +110,6 @@ const ArtistDetail = (props) => {
             setSongs((currentArtist.artistSongs))
         }
     }, [artistReducer, params.id])
-    console.log(artistReducer.currentArtist)
     const parseListSong = (data) => {
         let result = [];
         if (data != undefined) {
@@ -140,7 +139,9 @@ const ArtistDetail = (props) => {
                     {/* <p className="singer_name">By - Ava Cornish, Brian Hill</p> */}
                     <div className="album_feature">
                         <a className="album_date">{artist != null ? songs.length : '0'} bài hát   </a>
+                        <br/>
                         <a className="album_date">{`Hoạt động tại: ${artist != null ? artist.countryActive : ''}`}</a>
+                        <br/>
                         <a className="album_date">{`Lượt nghe: ${artist != null ? (artist.countListen != null ? artist.countListen : 0) : ''}`}</a>
                     </div>
                     <div style={{ color: 'white', fontWeight: '700' }} className="album_btn">

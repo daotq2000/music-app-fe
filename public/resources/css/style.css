@@ -5514,6 +5514,7 @@ h2.widget-title:after {
   }
 }
 @media (max-width: 991px) {
+  
   .ms_blog_wrapper .ms_blog_section {
     margin-bottom: 30px;
   }

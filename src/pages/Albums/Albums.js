@@ -92,7 +92,6 @@ const ListAlbums = (props) => {
                     <div className="row">
                         <div className="col-lg-12 col-md-12">
                         <Pagination onChange={handleChange}  count={state.totalPages !== undefined?state.totalPages:1} color="secondary" />
-
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,7 @@ import {renderArtist} from '../../utils/UtilsFunction'
 import PlayIcon from '../../resource/images/svg/play.svg'
 import {formatDate} from '../../utils/FormatDateTime'
 import $ from 'jquery'
+import { Link } from "react-router-dom";
 
 const AlbumDetail = (props) => {
     const ListSong = (props) => {
@@ -31,7 +32,6 @@ const AlbumDetail = (props) => {
             return (
                 <>
                     {props.items.map((item, i) => {
-
                         return (
 
                             <div className="col-lg-12 col-md-12 padding_right40">
@@ -52,7 +52,9 @@ const AlbumDetail = (props) => {
                                             </div>
                                             <div className="w_tp_song_name">
                                                 <h3><a>{item.title}</a></h3>
-                                                <h3><a>{renderArtist(item.artistSongs)}</a></h3>
+                                                <br/>
+                                                <h3><Link to={`/artist/${item.id}`}>{returnArtist(item.artistSongs)}</Link></h3>
+                                                <br/>
                                                 <h3>Lượt nghe: {item.countListen != null ? item.countListen : 0}</h3>
                                             </div>
                                         </div>
@@ -85,7 +87,24 @@ const AlbumDetail = (props) => {
 
         return '';
     }
-
+    const returnArtist = (artist) => {
+        if (artist == undefined) {
+            return 'N/A';
+        }
+        var artists = [];
+        if (artist != null || artist != undefined) {
+            if (artist.length > 0) {
+                 for (let i = 0; i < artist.length; i++) {
+                    artists.push(<Link to={`/artist/${artist[i].artists.id}`}>{artist[i].artists.fullName}</Link>); 
+                    if (artist.length > 1 && i < artist.length - 1) {
+                        artists.push(<span>&</span>);
+                    }
+                }
+                     
+            }
+        }
+        return artists;
+    }
     const params = useParams("id");
     const dispatch = useDispatch();
     useEffect(() => {

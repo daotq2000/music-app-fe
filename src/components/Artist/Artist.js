@@ -34,7 +34,7 @@ const Artist = (props) => {
     const createItem = (item) => {
         return (
             <>
-                <SwiperSlide key={`artist-${item.id}`} style={{ listStyle: "none" }}>
+                <SwiperSlide key={`artist-${crypto.randomUUID()}`} style={{ listStyle: "none" }}>
                     <div className="ms_rcnt_box">
                         <div className="ms_rcnt_box_img">
                             <img src={item.image} alt="" />
@@ -76,10 +76,10 @@ const Artist = (props) => {
     }
     return (
         <>
-           <div className="ms_featured_slider">
+           <div  className="ms_featured_slider">
                 <div style={title != undefined ? { display: 'none' } : { display: '' }} className="ms_heading">
                     <h1>Nghệ sĩ nổi bật</h1>
-                    <span className="veiw_all"><Link to={`/artist`}>Xem Thêm</Link></span>
+                    <span key={crypto.randomUUID()} className="veiw_all"><Link to={`/artist`}>Xem Thêm</Link></span>
                 </div>
                 <Swiper
                     id="artist"
