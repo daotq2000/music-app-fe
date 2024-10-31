@@ -10,8 +10,8 @@ import PrivateRouter from './router/PrivateRouter'
 import { HashRouter } from 'react-router-dom'
 function App() {
   return (
-    <HashRouter>
-     <SnackbarProvider maxSnack={5}>
+    <HashRouter baseName="/">
+     <SnackbarProvider  maxSnack={5}>
       <div className="App">
         <Router history={history}>
           <Switch>
