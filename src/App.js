@@ -7,7 +7,7 @@ import Dashboard from './componentAdmin/Dashboard/Dashboard'
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import PrivateRouter from './router/PrivateRouter'
-import { HashRouter } from 'react-router-dom'
+import { HashRouter as Router } from "react-router-dom"
 function App() {
   return (
     <HashRouter baseName="/">
