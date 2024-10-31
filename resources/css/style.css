@@ -4924,6 +4924,17 @@ h2.widget-title:after {
   }
 }
 @media (max-width: 1400px) {
+ .weekly_left{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+ }
+ .w_tp_song_name{
+  width: 100%;
+ }
+ .w_top_song{
+  width: 100%;
+ }
   .ms_genres_wrapper.ms_genres_single {
     margin-top: 50px;
   }
@@ -5231,7 +5242,7 @@ h2.widget-title:after {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    width: 85px;
+    width: 100%;
   }
   .slider_nav_next {
     right: 0;
