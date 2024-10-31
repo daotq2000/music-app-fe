@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import { Route, Router, Switch } from "react-router-dom";
+import { Route, Router, Switch,HashRouter } from "react-router-dom";
 import history from './router/history'
 import ClientRouter from './pages/Home/Home'
 import Dashboard from './componentAdmin/Dashboard/Dashboard'
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 import PrivateRouter from './router/PrivateRouter'
-import { HashRouter as Router } from "react-router-dom"
 function App() {
   return (
     <HashRouter baseName="/">
