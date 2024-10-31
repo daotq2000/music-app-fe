@@ -25,7 +25,7 @@ const Header = () => {
           </span>
         </div>
         <div style={{ fontSize: '13rem' }} className="ms_top_trend">
-          <span><a href="_blank" className="ms_color">Trending Songs :</a></span> <span className="top_marquee"><a href="_blank">Chúng ta của hiện tại, bức tranh từ nước mắt</a></span>
+          {/* <span><a href="_blank" className="ms_color">Trending Songs :</a></span> <span className="top_marquee"><a href="_blank">Chúng ta của hiện tại, bức tranh từ nước mắt</a></span> */}
         </div>
       </div>
       <div className="ms_top_right">
