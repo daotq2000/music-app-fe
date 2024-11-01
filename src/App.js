@@ -9,7 +9,7 @@ import { SnackbarProvider } from 'notistack';
 import PrivateRouter from './router/PrivateRouter'
 function App() {
   return (
-    <HashRouter baseName="/">
+    <BrowserRouter>
      <SnackbarProvider  maxSnack={5}>
       <div className="App">
         <Router history={history}>
@@ -20,7 +20,7 @@ function App() {
         </Router>
       </div>
       </SnackbarProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
