@@ -104,25 +104,25 @@ const PlayAudio = (props) => {
 
     setCurrentPlay(currentSong);
     createdAudio(currentSong);
-    var controlAudio = document.querySelector("#jp_container_1jp_container_1");
+    var controlAudio = document.querySelector("#jp_container_1");
     if (audio != undefined) {
       if (_isPlay && (audio.pause || audio.ended)) {
         console.log(audioCurrentTime.current);
 
         audioCurrentTime.current.play();
         if (controlAudio != null) {
-          controlAudio.setAttribute("class", "jp-state-playing");
+          controlAudio.classList.add("jp-state-playing");
+          // controlAudio.setAttribute("class", "jp-state-playing");
         }
-        // controlAudio.classList.add("jp-state-playing");
       } else if (!_isPlay) {
         let track = currentTrackMoment;
         let progress = progressBarWidth;
         setCurrentTrackMoment(track);
         setProgressBarWidth(progress);
         audioCurrentTime.current.pause();
-        // controlAudio.classList.remove("jp-state-playing");
         if (controlAudio != null) {
-          controlAudio.removeAttribute("class");
+          // controlAudio.removeAttribute("class");
+          controlAudio.classList.remove("jp-state-playing");
         }
       }
     }
