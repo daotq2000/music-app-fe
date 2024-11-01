@@ -57,7 +57,10 @@ const playReducer = createSlice({
         }, 
         playSingleSongSuccessfully(state, action){
             const song = action.payload;
-            return {...state,currentPlaySong:song,isSingle:true}
+            if(song != null && song != undefined){
+                return {...state,currentPlaySong:song,isSingle:true}
+            }
+            return {...state}
         }, 
         playSingleSongFailed(state, action){
 

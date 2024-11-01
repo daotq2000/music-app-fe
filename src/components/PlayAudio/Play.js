@@ -72,10 +72,19 @@ const PlayAudio = (props) => {
     if (currentSong != currentPlay) {
       if (currentSong != undefined) {
         var image = document.getElementById("avartarSong");
-        audio.src = currentSong.mediaUrl;
-        audio.title = currentSong.title;
-        image.src = currentSong.image;
-        dispatch(updateTotalListen({ target: "song", id: currentSong.id }));
+        if (audioCurrentTime.current != undefined) {
+          console.log(audioCurrentTime.current);
+          if (currentSong.mediaUrl && currentSong.title) {
+            audioCurrentTime.current.src = currentSong.mediaUrl;
+            audioCurrentTime.current.title = currentSong.title;
+            image.src = currentSong.image;
+          } else {
+            audioCurrentTime.current.src = currentSong.songs.mediaUrl;
+            audioCurrentTime.current.title = currentSong.songs.title;
+            image.src = currentSong.songs.image;
+          }
+        }
+        dispatch(updateTotalListen({ target: "song", id: currentSong.id?currentSong.id:currentSong.songs.id }));
       } else {
         let playList = state.playList;
         setCurrentPlay(playList[0]);
@@ -90,21 +99,31 @@ const PlayAudio = (props) => {
   };
   const PlayEventListener = (_isPlay) => {
     const playList = data.playList;
-    const currentSong = playList[indexPlay];
+    const currentSong = playList[playList.length > 1 ? indexPlay : 0];
+    console.log(currentSong, playList);
+
     setCurrentPlay(currentSong);
     createdAudio(currentSong);
-    var controlAudio = document.querySelector("#jp_container_1");
+    var controlAudio = document.querySelector("#jp_container_1jp_container_1");
     if (audio != undefined) {
       if (_isPlay && (audio.pause || audio.ended)) {
-        audio.play();
-        controlAudio.classList.add("jp-state-playing");
+        console.log(audioCurrentTime.current);
+
+        audioCurrentTime.current.play();
+        if (controlAudio != null) {
+          controlAudio.setAttribute("class", "jp-state-playing");
+        }
+        // controlAudio.classList.add("jp-state-playing");
       } else if (!_isPlay) {
         let track = currentTrackMoment;
         let progress = progressBarWidth;
         setCurrentTrackMoment(track);
         setProgressBarWidth(progress);
-        audio.pause();
-        controlAudio.classList.remove("jp-state-playing");
+        audioCurrentTime.current.pause();
+        // controlAudio.classList.remove("jp-state-playing");
+        if (controlAudio != null) {
+          controlAudio.removeAttribute("class");
+        }
       }
     }
   };
@@ -173,7 +192,7 @@ const PlayAudio = (props) => {
     }
   };
   const onTouch = (e) => {
-    if(e.changedTouches){
+    if (e.changedTouches) {
       var timeDragMobile = true;
       setTimeDrag(timeDragMobile);
       updatebar(e.changedTouches[0].pageX);
