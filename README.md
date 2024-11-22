@@ -8,7 +8,7 @@ pre : " <b> 2.3 </b> "
 image: "/images/3/3.0/music.jpg" # The path to your image
 ---
 ## 1.Overview Architechture
-![AWS DESIGN ARCHITECTURE](https://auto.io.vn/images/3/3.0/music-multi.drawio.svg?featherlight=false&width=100pc)
+![AWS DESIGN ARCHITECTURE](https://auto.io.vn/images/3/3.0/music-multi.drawio.svg)
 
 ### Challenge 3: Build a Music Serverless Application on Amazon Web Services (AWS)
 **Objective:**
