@@ -15,6 +15,10 @@ class AxiosService {
     }
 
     handleError(e) {
+        console.log(e);
+        if(e){
+            
+        }
         return Promise.reject(e);
     }
 

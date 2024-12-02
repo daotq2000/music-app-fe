@@ -1,4 +1,4 @@
-export const API_ENDPOINT = 'https://e97d-101-99-23-84.ngrok-free.app/'
+export const API_ENDPOINT = 'https://f79f-34-57-56-213.ngrok-free.app/'
 
 export const STATUS_CODE = {
     SUCCESS: 200,
