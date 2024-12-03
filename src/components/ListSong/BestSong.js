@@ -59,7 +59,7 @@ const ListSongs = () => {
   }, [state]);
   const Songs = (props) => {
     const playSingleSongAction = (songObject) => {
-      let result = state.topSongs;
+      let result = state.songs;
       let rs = [];
       let index = songObject.id;
       result.forEach((item, idx) => {

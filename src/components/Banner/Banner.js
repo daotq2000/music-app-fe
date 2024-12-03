@@ -17,7 +17,7 @@ const Banner = () => {
               <div className="ms_banner_text">
                 <h1>Âm nhạc</h1>
                 <h1 className="ms_color">Nơi xoa dịu tâm hồn!</h1>
-                <p>Bài hát được cập nhật liên tục...</p>
+                <p>Chữa lành những tổn thương...</p>
                 <br />
               </div>
             </div>
