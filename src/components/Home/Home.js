@@ -1,6 +1,7 @@
 import React from 'react'
 import ALbum from '../../components/Slider/Slider';
 import Artist from '../../components/Artist/Artist'
+import ListSong from '../../components/ListSong/BestSong'
 import AdvImage from '../../resource/images/adv.jpg'
 import Genres from '../../components/Genres/Genres'
 import Banner from '../../components/Banner/Banner'
@@ -55,6 +56,7 @@ const HomeComponent = () => {
             </div>
             {/* <!----Top Genres Section Start----> */}
             <Genres />
+            <ListSong/>
 
         </>
     );
