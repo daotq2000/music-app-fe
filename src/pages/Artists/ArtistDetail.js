@@ -13,6 +13,7 @@ import { getPlayList, playSingleSong } from "../../redux/playReducer";
 import $ from "jquery";
 import { updateTotalListen } from "../../redux/songReducer";
 import {Link} from 'react-router-dom'
+import {playSingleSongActionFunc} from '../../utils/UtilsFunction'
 const ListSong = (props) => {
   const dispatch = useDispatch();
   const items = props.items;
@@ -25,24 +26,11 @@ const ListSong = (props) => {
       target.find("ul.more_option").addClass("open_option");
     }
   };
-  const playSingleSongAction = (songObject) => {
-    let result = props.artistSongs;
-    let rs = [];
-    let index = songObject.id;
-    result.forEach((item, idx) => {
-      if (item.id != index) {
-        let songObj = { songs: item };
-        rs.push(songObj);
-      }
-    });
-    let song = { songs: songObject };
-    rs.splice(0, 0, song);
-    dispatch(playSingleSong(rs));
-  };
   if (items != null) {
     return (
       <>
         {props.items.map((item, i) => {
+          console.log(item)
           return (
             <div
               key={item.songs.id}
@@ -60,7 +48,7 @@ const ListSong = (props) => {
                       />
                       <div className="ms_song_overlay"></div>
                       <div
-                        onClick={() => playSingleSongAction(item)}
+                        onClick={() => playSingleSongActionFunc(item,props.artistSongs,dispatch,playSingleSong)}
                         className="ms_play_icon"
                       >
                         <img src={PlayIcon} alt="" />

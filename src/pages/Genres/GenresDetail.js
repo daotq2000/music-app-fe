@@ -12,24 +12,9 @@ import { playSingleSong } from "../../redux/playReducer";
 import { Albums } from '../../pages/Albums/Albums'
 import Pagination from '@material-ui/lab/Pagination';
 import $ from 'jquery'
+import {playSingleSongActionFunc} from '../../utils/UtilsFunction'
 const RenderListSong = (items) => {
     const dispatch = useDispatch();
-    const playSingleSongAction = (songObject) => {
-        let result = items;
-        if (result != undefined) {
-            let rs = [];
-            let index = songObject.id;
-            result.forEach((item, idx) => {
-                if (item.id != index) {
-                    let songObj = { songs: item }
-                    rs.push(songObj);
-                }
-            })
-            let song = { songs: songObject };
-            rs.splice(0, 0, song)
-            dispatch(playSingleSong(rs))
-        }
-    }
     const showMoreItem = (e) => {
         var target = $(e.target).parent().parent().parent();
         if (target.hasClass('ms_weekly_box')) {
@@ -55,7 +40,7 @@ const RenderListSong = (items) => {
                                         <img src={item.image} alt="" className="img-fluid" />
                                         <div className="ms_song_overlay" />
                                         <div className="ms_play_icon">
-                                            <img onClick={() => playSingleSongAction(item)} src={PlayIcon} alt="" />
+                                            <img onClick={() => playSingleSongActionFunc(item,items,dispatch,playSingleSong)} src={PlayIcon} alt="" />
                                         </div>
                                     </div>
                                     <div className="w_tp_song_name">

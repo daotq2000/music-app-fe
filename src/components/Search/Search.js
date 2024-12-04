@@ -24,6 +24,7 @@ import { getPlayList } from "../../redux/playReducer";
 import { Link } from "react-router-dom";
 import Album from '../../components/Slider/Slider'
 import Artist from '../../components/Artist/Artist'
+import {playSingleSongActionFunc} from '../../utils/UtilsFunction'
 export const Songs = (props) => {
   const [songs, setSongs] = useState([]);
   const search = props.search;
@@ -45,24 +46,6 @@ export const Songs = (props) => {
   const songReducer = useSelector((state) => {
     return state.songReducer;
   });
-
-
-  const playSingleSongAction = (songObject) => {
-    let result = songReducer.songs;
-    if (result != undefined) {
-      let rs = [];
-      let index = songObject.id;
-      result.forEach((item, idx) => {
-        if (item.id != index) {
-          let songObj = { songs: item }
-          rs.push(songObj);
-        }
-      })
-      let song = { songs: songObject };
-      rs.splice(0, 0, song)
-      dispatch(playSingleSong(rs))
-    }
-  }
   const showMoreItem = (e) => {
     var target = $(e.target).parent().parent().parent();
     if (target.hasClass('ms_weekly_box')) {
@@ -90,7 +73,7 @@ export const Songs = (props) => {
                       <img src={item.image} alt="" className="img-fluid" />
                       <div className="ms_song_overlay" />
                       <div className="ms_play_icon">
-                        <img onClick={() => playSingleSongAction(item)} src={PlayIcon} alt="" />
+                        <img onClick={() => playSingleSongActionFunc(item,songReducer.songs,dispatch,playSingleSong)} src={PlayIcon} alt="" />
                       </div>
                     </div>
                     <div className="w_tp_song_name">

@@ -8,17 +8,24 @@ import { renderArtist } from "../../utils/UtilsFunction";
 import { Link } from "react-router-dom";
 import { playSingleSong } from "../../redux/playReducer";
 import $ from "jquery";
+import {playSingleSongActionFunc} from '../../utils/UtilsFunction'
 const Top15SongPopular = () => {
   const [firstBlock, setFistBlock] = useState([]);
   const [secondBlock, setSecondBlock] = useState([]);
   const [thirdBlock, setThirdBlock] = useState([]);
+  const [topSongs,setTopSongs] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBestSong());
   }, [dispatch]);
+ 
   const state = useSelector((states) => {
     return states.songReducer;
   });
+  useEffect(() => {
+    setTopSongs(state.topSongs)
+  }, [state.topSongs]);
+  console.log(topSongs)
   const initialData = () => {
     const list = state.topSongs;
     let arr1 = [];
@@ -64,20 +71,6 @@ const Top15SongPopular = () => {
         }
       }
     };
-    const playSingleSongAction = (songObject) => {
-      let result = state.topSongs;
-      let rs = [];
-      let index = songObject.id;
-      result.forEach((item, idx) => {
-        if (item.id != index) {
-          let songObj = { songs: item };
-          rs.push(songObj);
-        }
-      });
-      let song = { songs: songObject };
-      rs.splice(0, 0, song);
-      dispatch(playSingleSong(rs));
-    };
     const returnArtist = (artist) => {
       if (artist == undefined) {
         return "N/A";
@@ -116,7 +109,7 @@ const Top15SongPopular = () => {
                       <div className="ms_song_overlay" />
                       <div className="ms_play_icon">
                         <img
-                          onClick={() => playSingleSongAction(item)}
+                          onClick={() => playSingleSongActionFunc(item,(state.topSongs || state.songs),dispatch,playSingleSong)}
                           src={PlayIcon}
                           alt=""
                         />

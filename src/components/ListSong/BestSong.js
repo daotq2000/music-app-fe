@@ -4,6 +4,7 @@ import { paginationSongs } from "../../redux/songReducer";
 import PlayIcon from "../../resource/images/svg/play.svg";
 import { Link } from "react-router-dom";
 import { playSingleSong } from "../../redux/playReducer";
+import {playSingleSongActionFunc} from '../../utils/UtilsFunction'
 const ListSongs = () => {
   const [firstBlock, setFistBlock] = useState([]);
   const [secondBlock, setSecondBlock] = useState([]);
@@ -58,20 +59,6 @@ const ListSongs = () => {
     initialData();
   }, [state]);
   const Songs = (props) => {
-    const playSingleSongAction = (songObject) => {
-      let result = state.songs;
-      let rs = [];
-      let index = songObject.id;
-      result.forEach((item, idx) => {
-        if (item.id != index) {
-          let songObj = { songs: item };
-          rs.push(songObj);
-        }
-      });
-      let song = { songs: songObject };
-      rs.splice(0, 0, song);
-      dispatch(playSingleSong(rs));
-    };
     const returnArtist = (artist) => {
       if (artist == undefined) {
         return "N/A";
@@ -110,7 +97,7 @@ const ListSongs = () => {
                       <div className="ms_song_overlay" />
                       <div className="ms_play_icon">
                         <img
-                          onClick={() => playSingleSongAction(item)}
+                          onClick={() => playSingleSongActionFunc(item,state.songs,dispatch,playSingleSong)}
                           src={PlayIcon}
                           alt=""
                         />

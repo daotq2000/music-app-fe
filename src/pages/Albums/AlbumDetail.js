@@ -9,7 +9,7 @@ import { getSecondsToMinutesAndSeconds } from "../../utils/FormatDateTime";
 import PlayAllIcon from "../../resource/images/svg/play_all.svg";
 import PauseAll from "../../resource/images/svg/pause_all.svg";
 import QueueImage from "../../resource/images/svg/add_q.svg";
-import { renderArtist } from "../../utils/UtilsFunction";
+import {playSingleSongActionFunc, renderArtist} from "../../utils/UtilsFunction";
 import PlayIcon from "../../resource/images/svg/play.svg";
 import { formatDate } from "../../utils/FormatDateTime";
 import $ from "jquery";
@@ -42,7 +42,7 @@ const AlbumDetail = (props) => {
                         <img src={item.image} alt="" className="img-fluid" />
                         <div className="ms_song_overlay"></div>
                         <div
-                          onClick={() => playSingleSongAction(item)}
+                          onClick={() => playSingleSongActionFunc(item,items,dispatch,playSingleSong)}
                           className="ms_play_icon"
                         >
                           <img src={PlayIcon} alt="" />
@@ -167,20 +167,6 @@ const AlbumDetail = (props) => {
   };
   const formatTimePlay = () => {
     return getSecondsToMinutesAndSeconds(Math.floor(state.totalTime));
-  };
-  const playSingleSongAction = (songObject) => {
-    let result = state.albumSongs;
-    let rs = [];
-    let index = songObject.id;
-    result.forEach((item, idx) => {
-      if (item.id != index) {
-        let songObj = { songs: item };
-        rs.push(songObj);
-      }
-    });
-    let song = { songs: songObject };
-    rs.splice(0, 0, song);
-    dispatch(playSingleSong(rs));
   };
   const renderArtistAlbum = (artist) => {
     let value = "";
