@@ -26,3 +26,7 @@ code {
   opacity: 0;
   transition: opacity 200ms;
 }
+
+.text-error {
+  color: red;
+}
