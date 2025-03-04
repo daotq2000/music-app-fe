@@ -1,5 +1,5 @@
 import { joiResolver } from '@hookform/resolvers/joi';
-import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 import Joi from 'joi';
 import { useSnackbar } from 'notistack';
 import { React, useState } from 'react';
@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import RegisterImage from '../../resource/images/register_img.png';
 import history from '../../router/history';
-import { API_ENDPOINT } from '../../utils/Constaints';
+import { loginAPI } from '../../services/auth';
 
 const login_schema = Joi.object().keys({
   username: Joi.string().required().messages({
@@ -18,8 +18,15 @@ const login_schema = Joi.object().keys({
   }),
 });
 
+// TODO: use axios interceptor
+// TODO: responsive
 const Login = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const [config, setConfig] = useState(null);
+  const [anchorOrigin, setAnchorOrigin] = useState({
+    horizontal: 'center',
+    vertical: 'bottom',
+  });
 
   const {
     register,
@@ -39,29 +46,26 @@ const Login = () => {
     txtPassword: false,
   });
 
+  const mutaion = useMutation({
+    mutationFn: loginAPI,
+    onSuccess: (data) => {
+      const token = data.headers.authorization;
+      localStorage.setItem('Authorization', token);
+      setConfig({ variant: 'success', anchorOrigin: anchorOrigin });
+      enqueueSnackbar('Đăng nhập thành công', config);
+      history.push(`/admin/album`);
+    },
+    onError: (error) => {
+      setConfig({ variant: 'error', anchorOrigin: anchorOrigin });
+      let errors = error.response;
+      if (errors.status == 401) {
+        enqueueSnackbar('Tên tài khoản hoặc mật khẩu không chính xác', config);
+      }
+    },
+  });
+
   const onSubmit = (data) => {
-    console.log(data);
-    let config = null;
-    let anchorOrigin = { horizontal: 'center', vertical: 'bottom' };
-    axios
-      .post(API_ENDPOINT + 'auth', data)
-      .then((res) => {
-        const token = res.headers.authorization;
-        localStorage.setItem('Authorization', token);
-        config = { variant: 'success', anchorOrigin: anchorOrigin };
-        enqueueSnackbar('Đăng nhập thành công', config);
-        history.push(`/admin/album`);
-      })
-      .catch((error) => {
-        config = { variant: 'error', anchorOrigin: anchorOrigin };
-        let errors = error.response;
-        if (errors.status == 401) {
-          enqueueSnackbar(
-            'Tên tài khoản hoặc mật khẩu không chính xác',
-            config
-          );
-        }
-      });
+    mutaion.mutate(data);
   };
 
   return (
