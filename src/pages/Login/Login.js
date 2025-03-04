@@ -18,7 +18,6 @@ const login_schema = Joi.object().keys({
   }),
 });
 
-// TODO: fix button css
 const Login = () => {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -41,6 +40,7 @@ const Login = () => {
   });
 
   const onSubmit = (data) => {
+    console.log(data);
     let config = null;
     let anchorOrigin = { horizontal: 'center', vertical: 'bottom' };
     axios
@@ -71,11 +71,7 @@ const Login = () => {
           <div style={{ padding: '10px' }} className='ms_register_img'>
             <img src={RegisterImage} alt='' className='img-fluid' />
           </div>
-          <form
-            style={{ padding: '10px' }}
-            className='ms_register_form'
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <div style={{ padding: '10px' }} className='ms_register_form'>
             <h2>Đăng Nhập / Đăng Ký</h2>
             <div className='form-group'>
               <input
@@ -118,9 +114,13 @@ const Login = () => {
                 <span className='checkmark' />
               </label>
             </div>
-            <button className='ms_btn' target='_blank' type='submit'>
+            <a
+              className='ms_btn'
+              target='_blank'
+              onClick={handleSubmit(onSubmit)}
+            >
               Đăng nhập ngay
-            </button>
+            </a>
             <div className='popup_forgot'>
               <a href='#'>Quên mật khẩu ?</a>
             </div>
@@ -134,7 +134,7 @@ const Login = () => {
                 Đăng ký
               </Link>
             </p>
-          </form>
+          </div>
         </div>
       </div>
     </>
