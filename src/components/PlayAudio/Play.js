@@ -418,7 +418,9 @@ const PlayAudio = (props) => {
         style={state.openBarPlay ? { display: "" } : { display: "none" }}
         className="ms_player_wrapper"
       >
-        <div className="ms_player_close">
+        <div className="ms_player_close" style={{
+            alignItems:'center'
+        }}>
           <i className="fa fa-angle-up" aria-hidden="true" />
         </div>
         <div className="player_mid">
